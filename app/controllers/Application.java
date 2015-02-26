@@ -7,13 +7,13 @@ import views.html.*;
 import models.*;
 
 public class Application extends Controller {
-	static String message = "Welcome";
+	static String message = "Welcome to Bookmark";
 
 	static Form<Name> input = new Form<Name>(Name.class);
 
 	public static Result index() {
 		String name = session("name");
-		if (name == null) {
+		if (name == null){
 			name = "No name";
 			return ok(index.render(message, name, input));
 		}

@@ -20,9 +20,20 @@ public class IntegrationTest {
         running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
             public void invoke(TestBrowser browser) {
                 browser.goTo("http://localhost:3333");
-                assertThat(browser.pageSource()).contains("Your new application is ready.");
+                assertThat(browser.pageSource()).contains("Welcome to Bookmark");
+                assertThat(browser.pageSource()).contains("Bookmark");
             }
         });
     }
-
+@Test
+    public void userTest() {
+        running(testServer(3333, fakeApplication(inMemoryDatabase())), HTMLUNIT, new Callback<TestBrowser>() {
+            public void invoke(TestBrowser browser) {
+            	Controller.session("name","test");
+                browser.goTo("http://localhost:9000/bookmarks");
+                assertThat(browser.pageSource()).contains("Welcome test");
+                assertThat(browser.pageSource()).contains("Save bookmark");
+            }
+        });
+    }
 }
